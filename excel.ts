@@ -12,4 +12,20 @@ export class ExcelService {
         const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         XLSX.writeFile(workbook, ExcelService.toExportFileName(excelFileName));
     }
+    public readJsonFromExcelFile(fileUrl: string): IBook[] {
+        const workbook = XLSX.readFile(fileUrl);
+        return XLSX.utils.sheet_to_json(workbook.Sheets['data']);
+    }
+}
+interface IBook {
+    bookId: string;
+    bookName: string;
+    bookUrl: string;
+    bookImg: string;
+    bookAuthor: string;
+    bookPubPlace: string;
+    bookPubDate: string;
+    bookRating: string;
+    bookRatingPeople: string;
+    bookIntro: string;
 }
