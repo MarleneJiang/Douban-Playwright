@@ -6,14 +6,17 @@ test.describe('bookList', async () => {
     let books = [];
     test('get book information', async ({ page }) => {
         const tagName = '科普'
-        await page.goto(`https://book.douban.com/tag/${tagName}`);
+        await page.goto(`https://book.douban.com/tag/${tagName}?start=800&type=T`);
         page.once('load', () => console.log('Page loaded!'));
 
         let nextButton = page.locator('text=后页>');
+        
         while(await nextButton.getAttribute('href') !== null) {
             books = books.concat(await getBooks(page));
             await nextButton.click();
-            await page.waitForTimeout(1000);
+            if(await page.locator('text=后页>').count()<=0){
+                break;
+            }
             nextButton = page.locator('text=后页>');
         }
         books = books.concat(await getBooks(page));
@@ -26,6 +29,7 @@ export async function getBooks(page: Page): Promise<IBook[]> {
     let books =[];
     const bookLists = page.locator('//*[@id="subject_list"]/ul/li');
     const count = await bookLists.count();
+    console.log(`count: ${count}`);
     for(let i = 0; i < count; i++) {
         const bookTitle = bookLists.nth(i).locator('div.info > h2 > a');
         const bookId = (await bookTitle.getAttribute('onclick')).split("'")[5];
@@ -53,7 +57,7 @@ export async function getBooks(page: Page): Promise<IBook[]> {
 
         
         const book = {bookId, bookName, bookUrl, bookImg, bookAuthor, bookPubPlace, bookPubDate, bookRating, bookRatingPeople, bookIntro};
-        console.log(bookName);
+        // console.log(bookName);
         books.push(book);
     }
     return books;
