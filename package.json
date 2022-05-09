@@ -1,13 +1,19 @@
 {
   "name": "douban",
   "version": "1.0.0",
-  "description": "",
+  "description": "爬取豆瓣图书信息",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "booklist": "playwright test tests/bookList --headed --project=chromium --repeat-each 1 --retries 0 --timeout 0 --workers 1",
+    "report":"npx playwright show-report"
+  },
   "keywords": [],
-  "author": "",
+  "author": "蒋马灵、相洋",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.21.1"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
   }
 }
