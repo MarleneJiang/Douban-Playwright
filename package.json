@@ -4,7 +4,7 @@
   "description": "爬取豆瓣图书信息",
   "main": "index.js",
   "scripts": {
-    "booklist": "playwright test tests/bookList --headed --project=chromium --repeat-each 1 --retries 0 --timeout 0 --workers 1",
+    "booklist": "playwright test tests/bookList",
     "report":"npx playwright show-report"
   },
   "keywords": [],
