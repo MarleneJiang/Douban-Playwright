@@ -5,7 +5,8 @@ import { ExcelService } from "../../excel";
 test.describe('bookList', async () => {
     let books = [];
     test('get book information', async ({ page }) => {
-        await page.goto('https://book.douban.com/tag/%E4%BA%92%E8%81%94%E7%BD%91');
+        const tagName = '科普'
+        await page.goto(`https://book.douban.com/tag/${tagName}`);
         page.once('load', () => console.log('Page loaded!'));
 
         let nextButton = page.locator('text=后页>');
@@ -16,7 +17,7 @@ test.describe('bookList', async () => {
             nextButton = page.locator('text=后页>');
         }
         books = books.concat(await getBooks(page));
-        new ExcelService().exportAsExcelFile(books, "互联网图书数据");
+        new ExcelService().exportAsExcelFile(books, `${tagName}图书数据`);
     });
     
 });
