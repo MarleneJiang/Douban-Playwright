@@ -21,7 +21,7 @@ test.describe('bookList', async () => {
     
 });
 
-async function getBooks(page: Page) {
+export async function getBooks(page: Page): Promise<IBook[]> {
     let books =[];
     const bookLists = page.locator('//*[@id="subject_list"]/ul/li');
     const count = await bookLists.count();
@@ -56,4 +56,17 @@ async function getBooks(page: Page) {
         books.push(book);
     }
     return books;
+}
+
+interface IBook {
+    bookId: string;
+    bookName: string;
+    bookUrl: string;
+    bookImg: string;
+    bookAuthor: string;
+    bookPubPlace: string;
+    bookPubDate: string;
+    bookRating: string;
+    bookRatingPeople: string;
+    bookIntro: string;
 }

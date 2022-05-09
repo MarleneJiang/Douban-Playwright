@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "booklist": "playwright test tests/bookList",
-    "report":"npx playwright show-report"
+    "report": "npx playwright show-report"
   },
   "keywords": [],
   "author": "蒋马灵、相洋",
