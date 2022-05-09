@@ -17,7 +17,7 @@ export class ExcelService {
         return XLSX.utils.sheet_to_json(workbook.Sheets['data']);
     }
 }
-interface IBook {
+export interface IBook {
     bookId: string;
     bookName: string;
     bookUrl: string;

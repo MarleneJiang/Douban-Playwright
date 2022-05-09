@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { ExcelService } from "../../excel";
+import { ExcelService, IBook } from "../../excel";
 
 
 test.describe('bookList', async () => {
@@ -64,15 +64,3 @@ export async function getBooks(page: Page): Promise<IBook[]> {
     return books;
 }
 
-interface IBook {
-    bookId: string;
-    bookName: string;
-    bookUrl: string;
-    bookImg: string;
-    bookAuthor: string;
-    bookPubPlace: string;
-    bookPubDate: string;
-    bookRating: string;
-    bookRatingPeople: string;
-    bookIntro: string;
-}
