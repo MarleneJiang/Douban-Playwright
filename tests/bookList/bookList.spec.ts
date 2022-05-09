@@ -6,7 +6,7 @@ test.describe('bookList', async () => {
     let books = [];
     test('get book information', async ({ page }) => {
         const tagName = '科普'
-        await page.goto(`https://book.douban.com/tag/${tagName}?start=800&type=T`);
+        await page.goto(`https://book.douban.com/tag/${tagName}?start=0&type=T`);
         page.once('load', () => console.log('Page loaded!'));
 
         let nextButton = page.locator('text=后页>');
@@ -14,6 +14,7 @@ test.describe('bookList', async () => {
         while(await nextButton.getAttribute('href') !== null) {
             books = books.concat(await getBooks(page));
             await nextButton.click();
+            await page.locator('//*[@id="db-nav-book"]/div[1]/div/div[1]/a').waitFor();
             if(await page.locator('text=后页>').count()<=0){
                 break;
             }
