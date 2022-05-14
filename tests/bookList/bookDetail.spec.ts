@@ -5,14 +5,14 @@ import { getBooks } from "./bookList.spec";
 test.describe('bookDetail', async () => {
   test('get book details', async ({ page }) => {
     let bookDetailsList = [];
-    const bookList = new ExcelService().readJsonFromExcelFile('算法图书数据-1652457635518.xlsx');
+    const bookList = new ExcelService().readJsonFromExcelFile('哲学图书数据-1652459074748.xlsx');
     for (let i = 0; i < bookList.length; i++) {
       const bookDetailUrl = bookList[i].bookUrl;
       await page.goto(bookDetailUrl);
       let bookDetails = await getBookDetails(page);
       bookDetailsList.push(bookDetails);
     }
-    new ExcelService().exportAsExcelFile(bookDetailsList, `算法图书数据`);
+    new ExcelService().exportAsExcelFile(bookDetailsList, `哲学图书数据`);
   });
 
 });
