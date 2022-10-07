@@ -5,7 +5,7 @@ import { ExcelService, IBook } from "../excel";
 test.describe('bookList', async () => {
     let books = [];
     test('get book information', async ({ page }) => {
-        const tagName = '编程'
+        const tagName = '通信'
         await page.goto(`https://book.douban.com/tag/${tagName}?start=0&type=T`);
         page.once('load', () => console.log('Page loaded!'));
 
