@@ -11,7 +11,7 @@
   "author": "蒋马灵、相洋",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.21.1"
+    "@playwright/test": "^1.26.1"
   },
   "dependencies": {
     "xlsx": "^0.18.5"

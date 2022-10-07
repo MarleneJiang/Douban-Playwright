@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { ExcelService, IBook } from "../../excel";
+import { ExcelService, IBook } from "../excel";
 
 
 test.describe('bookList', async () => {
