@@ -2,9 +2,9 @@
   "name": "douban",
   "version": "1.0.0",
   "description": "爬取豆瓣图书信息",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "booklist": "npx playwright test ./src/tests/bookList/bookList.spec.ts --headed",
+    "booklist": "npx playwright test tests/bookList/bookList.spec.ts --headed",
     "report": "npx playwright show-report"
   },
   "keywords": [],
