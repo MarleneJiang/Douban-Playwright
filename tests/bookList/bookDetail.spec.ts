@@ -1,7 +1,5 @@
-import { test, expect, Page } from "@playwright/test";
-import { ExcelService } from "../../utils/excel";
-import type { IBook } from "../../utils/type";
-import { getBooks } from "./bookList.spec";
+import { test, Page } from "@playwright/test";
+import { ExcelService } from "../../excel";
 
 test.describe("bookDetail", async () => {
   test("get book details", async ({ page }) => {

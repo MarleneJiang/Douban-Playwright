@@ -1,6 +1,6 @@
-import type { IBook } from "../../utils/type";
-import { test, expect, Page } from "@playwright/test";
-import { ExcelService } from "../../utils/excel";
+import type { IBook } from "../../type";
+import { test, Page } from "@playwright/test";
+import { ExcelService } from "../../excel";
 
 test.describe("bookList", async () => {
   let books: Array<IBook> = [];
@@ -9,32 +9,20 @@ test.describe("bookList", async () => {
     await page.goto(`https://book.douban.com/tag/${tagName}?start=0&type=T`);
     page.once("load", () => console.log("Page loaded!"));
 
-    let nextButton = page.locator('text=后页>');
-        
-    while(await nextButton.getAttribute('href') !== null) {
-        books = books.concat(await getBooks(page));
-        await nextButton.click();
-        await page.locator('//*[@id="db-nav-book"]/div[1]/div/div[1]/a').waitFor();
-        if(await page.locator('text=后页>').count()<=0){
-            break;
-        }
-        nextButton = page.locator('text=后页>');
+    for (
+      let nextButton = page.locator("text=后页>");
+      ;
+      await nextButton.click()
+    ) {
+      await page
+        .locator('//*[@id="db-nav-book"]/div[1]/div/div[1]/a')
+        .waitFor();
+      books = books.concat(await getBooks(page));
+      nextButton = page.locator("text=后页>");
+      if ((await nextButton.count()) <= 0) {
+        break;
+      }
     }
-    books = books.concat(await getBooks(page));
-    // for (
-    //   let nextButton = page.locator("text=后页>");
-    //   (await nextButton.getAttribute("href")) !== null;
-    //   await nextButton.click()
-    // ) {
-    //   await page
-    //     .locator('//*[@id="db-nav-book"]/div[1]/div/div[1]/a')
-    //     .waitFor();
-    //   books = books.concat(await getBooks(page));
-    //   nextButton = page.locator("text=后页>");
-    //   if ((await nextButton.count()) <= 0) {
-    //     break;
-    //   }
-    // }
 
     new ExcelService().exportAsExcelFile(books, `${tagName}图书数据`);
   });
